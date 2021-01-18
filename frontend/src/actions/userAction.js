@@ -5,9 +5,9 @@ import {
 } from '../constants/userConstants.js';
 import axios from 'axios';
 
-export const login = (email, password) => async (dispach) => {
+export const login = (email, password) => async (dispatch) => {
 	try {
-		dispach({
+		dispatch({
 			type: USER_LOGIN_REQUEST,
 		});
 
@@ -26,7 +26,7 @@ export const login = (email, password) => async (dispach) => {
 			config
 		);
 
-		dispach({
+		dispatch({
 			type: USER_LOGIN_SUCCESS,
 			payload: data,
 		});
