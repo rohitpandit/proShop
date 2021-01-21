@@ -22,6 +22,12 @@ const OrderScreen = ({ match }) => {
 	const orderDetails = useSelector((state) => state.orderDetails);
 	const { order, loading, error } = orderDetails;
 
+	useEffect(() => {
+		if (!order || order._id !== orderId) {
+			dispatch(getOrderDetails(orderId));
+		}
+	}, [order, orderId]);
+
 	if (!loading) {
 		// calculate prices
 		const addDecimals = (num) => {
@@ -31,12 +37,6 @@ const OrderScreen = ({ match }) => {
 			order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
 		);
 	}
-
-	useEffect(() => {
-		if (!order || order._id !== orderId) {
-			dispatch(getOrderDetails(orderId));
-		}
-	}, [order, orderId]);
 
 	return loading ? (
 		<Loader />
